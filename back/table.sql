@@ -65,3 +65,11 @@ CREATE TABLE DelivranceCopie (
     etat INTEGER,  --1 valide, 10 annuler
     FOREIGN KEY(idDemandeCopie) REFERENCES DemandeCopie(id)
 );
+create view ListeDemandeClient as
+select DemandeCopie.id,
+        Personne.idUnique,
+        DemandeCopie.dateDemande,
+        DemandeCopie.nbCopie,
+        DemandeCopie.etat,
+        Commune.nom nomCommune
+from DemandeCopie join Personne on DemandeCopie.idPersonne=Personne.id join Commune on Commune.id=DemandeCopie.idCommune;

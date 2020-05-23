@@ -5,8 +5,6 @@
  */
 package commune.app.utilitaire.fonction;
 
-import commune.app.utilitaire.models.UserToken;
-import commune.app.utilitaire.models.Users;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
@@ -17,7 +15,7 @@ import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
-import java.util.regex.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -107,48 +105,48 @@ public class Utilitaire {
 
         return isValid;
     }
-    public static boolean checkNaissance(Date datenaiss) {
-        boolean b = false;
-        Date currentdate = Date.valueOf(Utilitaire.getCurrentDate());
-        int currentDateenJour = (currentdate.getYear() * 365) + (currentdate.getMonth() * 30) + (currentdate.getDate());
-        int datenaissenJour = (datenaiss.getYear() * 365) + (datenaiss.getMonth() * 30) + (datenaiss.getDate());
-        int calc = currentDateenJour - datenaissenJour;
-        if (calc <= 0) {
-            //false 
-        } else {
-            if ((calc / 365) >= Constantes.AGE_MIN_AUTHORIZED) {
-                b = true;
-            }
-        }
-        return b;
-    }
-    public static boolean checkMotDePasseSeq(String mdp) {
-        boolean b = false;
-        Pattern patternlettre = Pattern.compile(Constantes.REGEX_PATTERN_LETTRE);
-        Matcher matcher = patternlettre.matcher(mdp);
-        int countlettre = 0, countchiffre = 0, countspec = 0;
-        while (matcher.find()) {
-            countlettre++;
-        }
-
-        Pattern patternchiffre = Pattern.compile(Constantes.REGEX_PATTERN_CHIFFRE);
-        matcher = patternchiffre.matcher(mdp);
-
-        while (matcher.find()) {
-            countchiffre++;
-        }
-        Pattern patternspec = Pattern.compile(Constantes.REGEX_PATTERN_SPECIAUX);
-        matcher = patternspec.matcher(mdp);
-        while (matcher.find()) {
-            countspec++;
-        }
-
-        if (countchiffre >= Constantes.PASSWORD_CHIFFRE_REQUIS && countlettre >= Constantes.PASSWORD_LETTRE_REQUIS && countspec >= Constantes.PASSWORD_SPECIAUX_REQUIS) {
-            b = true;
-        }
-        //System.out.println(countlettre+" "+countchiffre+" "+countspec);
-        return b;
-    }
+//    public static boolean checkNaissance(Date datenaiss) {
+//        boolean b = false;
+//        Date currentdate = Date.valueOf(Utilitaire.getCurrentDate());
+//        int currentDateenJour = (currentdate.getYear() * 365) + (currentdate.getMonth() * 30) + (currentdate.getDate());
+//        int datenaissenJour = (datenaiss.getYear() * 365) + (datenaiss.getMonth() * 30) + (datenaiss.getDate());
+//        int calc = currentDateenJour - datenaissenJour;
+//        if (calc <= 0) {
+//            //false 
+//        } else {
+//            if ((calc / 365) >= Constantes.AGE_MIN_AUTHORIZED) {
+//                b = true;
+//            }
+//        }
+//        return b;
+//    }
+//    public static boolean checkMotDePasseSeq(String mdp) {
+//        boolean b = false;
+//        Pattern patternlettre = Pattern.compile(Constantes.REGEX_PATTERN_LETTRE);
+//        Matcher matcher = patternlettre.matcher(mdp);
+//        int countlettre = 0, countchiffre = 0, countspec = 0;
+//        while (matcher.find()) {
+//            countlettre++;
+//        }
+//
+//        Pattern patternchiffre = Pattern.compile(Constantes.REGEX_PATTERN_CHIFFRE);
+//        matcher = patternchiffre.matcher(mdp);
+//
+//        while (matcher.find()) {
+//            countchiffre++;
+//        }
+//        Pattern patternspec = Pattern.compile(Constantes.REGEX_PATTERN_SPECIAUX);
+//        matcher = patternspec.matcher(mdp);
+//        while (matcher.find()) {
+//            countspec++;
+//        }
+//
+//        if (countchiffre >= Constantes.PASSWORD_CHIFFRE_REQUIS && countlettre >= Constantes.PASSWORD_LETTRE_REQUIS && countspec >= Constantes.PASSWORD_SPECIAUX_REQUIS) {
+//            b = true;
+//        }
+//        //System.out.println(countlettre+" "+countchiffre+" "+countspec);
+//        return b;
+//    }
 
     public static Time getTime(Time ts, int heure) {
         ts.setHours(ts.getHours() + heure);
@@ -179,27 +177,11 @@ public class Utilitaire {
             return val;
         }
     }
-
-    public static Users getUserFromToken(String token, Connection c) throws Exception {
-        Users user = null;
-        try {
-           
-            UserToken[] ut = (UserToken[]) GeneriqueDAO.select(UserToken.class, " where token='" + token.trim() + "' and etat=" + Constantes.TOKEN_VALIDE, c);
-            if (ut.length != 0) {
-               
-                Users[] userTab = (Users[]) GeneriqueDAO.select(Users.class, " where iduser='" + ut[0].getIdUser() + "'", c);
-                
-                if (userTab.length != 0) {
-                    return userTab[0];
-                }
-
-            }
-        } catch (Exception e) {
-            throw e;
-        }
-
-        return user;
-    }
+    public static int getDaysBetweenTowDates(Date d1, Date d2) {
+		int nombreJours = 0;
+		long diff = d1.getTime() - d2.getTime();
+		nombreJours = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+		return nombreJours;
+	}
   
-
 }

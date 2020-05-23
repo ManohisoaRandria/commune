@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 
 /**
  *
- * @author Mirantolalaina
+ * @author Manohisoa
  */
 @Classe(table = "UserToken")
 public class UserToken {

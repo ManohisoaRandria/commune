@@ -43,13 +43,13 @@ public class GeneriqueDAO {
     ///association
     
     public static Connection getConnection() throws Exception {
-        String url="F:\\_S5\\Web\\CloudS5Complet\\Back\\src\\main\\java\\clouds5\\data\\databaseConfig.xml";
+        String url="D:\\wcc\\s1\\back\\CommuneApp\\src\\main\\java\\commune\\app\\databaseConfig.xml";
         String url2="D:\\S5\\web\\projectAndTp\\projects\\clouds5\\Back\\src\\main\\java\\clouds5\\data\\databaseConfig.xml";
-        // String dbUrl = System.getenv("JDBC_DATABASE_URL");    
-        // Connection c= DriverManager.getConnection(dbUrl);
-        // c.setAutoCommit(false);
-        // return c;
-        return getConnection(url);
+         String dbUrl = System.getenv("JDBC_DATABASE_URL");    
+         Connection c= DriverManager.getConnection(dbUrl);
+         c.setAutoCommit(false);
+         return c;
+//        return getConnection(url);
         //return getConnection(Constantes.DBNAME, Constantes.USERNAME, Constantes.PASSWORD, Constantes.SGBD, Constantes.PORT, Constantes.HOST);
     }
     
