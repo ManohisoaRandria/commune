@@ -53,6 +53,7 @@ CREATE TABLE DemandeCopie (
     nbCopie INTEGER,
     etat INTEGER,   --1 valide, 10 vita sonia,20 annuler
     idCommune VARCHAR(50),
+    --karapanondronle olona ndemande
     FOREIGN KEY(idCommune) REFERENCES Commune(id),
     FOREIGN KEY(idPersonne) REFERENCES Personne(id)
 );
