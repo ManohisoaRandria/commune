@@ -1,5 +1,4 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -16,6 +15,7 @@ import { CommuneComponent } from './commune/commune/commune.component';
 
 import { PublicService } from './service/public.service';
 import { CommuneService } from './service/commune.service';
+import { NgModule } from '@angular/core';
 
 const appRoutes: Routes = [
   {path: '', component: LoginPersonneComponent},
