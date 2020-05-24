@@ -13,10 +13,8 @@ export class LoginPersonneComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSubmit() {
-    this.router.navigate(['LoginEmployee']);
-  }
-  go1() {
+  onSubmit(idUnique: string) {
+    localStorage.setItem("idUnique", idUnique);
     this.router.navigate(['Info']);
   }
 

@@ -8,22 +8,27 @@ export class PublicService {
 
     constructor(private httpClient: HttpClient) { }
 
-    signIn(idUnique: string) {
-
-    }
     getInfo(idUnique: string) {
-        this.httpClient.get('localhost:8080/apropos/' + idUnique).subscribe(respone => {
-            console.log(respone);
-            return respone['response'];
+        this.httpClient.get('localhost:8080/apropos/' + idUnique).subscribe(response => {
+            console.log(response);
+            return response['response'];
         });
     }
     getListeDemande(idUnique: string) {
-        this.httpClient.get('localhost:8080/listeDemande/' + idUnique).subscribe(respone => {
-            console.log(respone);
-            return respone['response'];
+        this.httpClient.get('localhost:8080/listeDemande/' + idUnique).subscribe(response => {
+            console.log(response);
+            return response['response'];
         });
     }
-    demanderCpoie() {
-        
+    demanderCpoie(idUnique: string, nbr: number) {
+        var demande = {
+            idU: idUnique,
+            nbCopie: nbr
+        }
+        this.httpClient.post('localhost:8080/faireDemande', demande).subscribe(response => {
+            console.log(response);
+            console.log('demande envoyee');
+            return response['message'];
+        });
     }
 }
