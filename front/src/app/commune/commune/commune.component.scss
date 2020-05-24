@@ -1,10 +1,7 @@
-li {
-    display: block;
+a {
     text-decoration: none;
+    margin: 5px;
 }
-li a {
-    text-decoration: none;
-}
-li a:hover {
+a:hover {
     background-color: #dddddd;
 }
