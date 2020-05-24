@@ -17,11 +17,11 @@ import java.sql.Timestamp;
 @Classe(table = "UserToken")
 public class UserToken {
     @PrimaryKey
-    @Attribut(colonne = "idtoken")
-    private String idtoken;
+    @Attribut(colonne = "id")
+    private String id;
     
-    @Attribut(colonne = "idUser")
-    private String idUser;
+    @Attribut(colonne = "idUserCommune")
+    private String idUserCommune;
     
     @Attribut(colonne = "creation")
     private Timestamp creation;
@@ -35,9 +35,9 @@ public class UserToken {
     @Attribut(colonne = "etat")
     private int etat;
 
-    public UserToken(String idtoken, String idUser, Timestamp creation, String token, Timestamp expiration, int etat) {
-        this.idtoken = idtoken;
-        this.idUser = idUser;
+    public UserToken(String id, String idUserCommune, Timestamp creation, String token, Timestamp expiration, int etat) {
+        this.id = id;
+        this.idUserCommune = idUserCommune;
         this.creation = creation;
         this.token = token;
         this.expiration = expiration;
@@ -57,20 +57,20 @@ public class UserToken {
         this.expiration = expiration;
     }
 
-    public String getIdtoken() {
-        return idtoken;
+    public String getId() {
+        return id;
     }
 
-    public void setIdtoken(String idtoken) {
-        this.idtoken = idtoken;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getIdUser() {
-        return idUser;
+    public String getIdUserCommune() {
+        return idUserCommune;
     }
 
-    public void setIdUser(String idUser) {
-        this.idUser = idUser;
+    public void setIdUserCommune(String idUserCommune) {
+        this.idUserCommune = idUserCommune;
     }
 
     public Timestamp getCreation() {

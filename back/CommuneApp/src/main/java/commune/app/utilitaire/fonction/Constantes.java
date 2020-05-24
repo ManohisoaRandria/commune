@@ -19,6 +19,10 @@ public class Constantes {
     
     public final static String REGEX_PATTERN_SPECIAUX="[^a-zA-Z|^0-9]";
     
+    public final static String EMAIL_FORMAT_ERROR="Veuillez entrez une Adresse Email Valide";
+    
+    public final static String MAIL_DOUBLON_ERROR="Adresse Email Déjà utilisé ";
+    
     public final static int ETAT_VALID=1;
     
     public final static int ETAT_ANNULEE=20;
@@ -28,6 +32,8 @@ public class Constantes {
     public final static int TOKEN_VALIDE=1;
     
     public final static int TOKEN_ANNULER=11;
+    
+    public final static int TOKEN_EXPIRATION=50;//minute
     
     public final static String INSERT_OK="Insert OK";
     
@@ -60,5 +66,6 @@ public class Constantes {
     public final static String AUTHORIZATION_REFUSED="Vous n'avez pas les droits nécessaires pour modifier/accéder à ce contenu veuillez vous authentifier";
   
     public final static String ID_DEMANDE_COPIE="DMDCP";
+    public final static int PASSWORD_MIN=4;
   
 }

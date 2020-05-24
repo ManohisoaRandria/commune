@@ -29,17 +29,28 @@ public class DemandeCopie {
     private int etat;
     @Attribut(colonne = "idCommune")
     private String idCommune;
-
+    @Attribut(colonne = "urlDown")
+    private String urlDown;
+    
     public DemandeCopie() {
     }
 
-    public DemandeCopie(String id, String idPersonne, Date dateDemande, int nbCopie, int etat, String idCommune) {
+    public DemandeCopie(String id, String idPersonne, Date dateDemande, int nbCopie, int etat, String idCommune, String urlDown) {
         this.id = id;
         this.idPersonne = idPersonne;
         this.dateDemande = dateDemande;
         this.nbCopie = nbCopie;
         this.etat = etat;
         this.idCommune = idCommune;
+        this.urlDown = urlDown;
+    }
+
+    public String getUrlDown() {
+        return urlDown;
+    }
+
+    public void setUrlDown(String urlDown) {
+        this.urlDown = urlDown;
     }
 
     public String getId() {
@@ -89,5 +100,7 @@ public class DemandeCopie {
     public void setIdCommune(String idCommune) {
         this.idCommune = idCommune;
     }
+
+   
     
 }

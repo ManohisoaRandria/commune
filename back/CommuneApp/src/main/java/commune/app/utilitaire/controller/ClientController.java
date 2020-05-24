@@ -54,22 +54,23 @@ public class ClientController {
             } 
         return rep;
     }
-    @GetMapping(path ="/listeDemande/{idUnique}")
-    public JSONResponse getListeDemande(@PathVariable String idUnique) throws SQLException{
+    @GetMapping(path ="/listeDemande/{id}")
+    public JSONResponse getListeDemande(@PathVariable String id) throws SQLException{
            
         JSONResponse rep = new JSONResponse();
          Connection c=null;
             try {
                 c=GeneriqueDAO.getConnection();
-                Object[] o;
-                if(idUnique==null) {
+                ListeDemandeClient[] o;
+                if(id==null) {
                     throw new Exception("id unique absent");
                 }else {
-                    o=GeneriqueDAO.select(ListeDemandeClient.class, " where idUnique='"+idUnique.trim()+"'", c);
+                    o=(ListeDemandeClient[])GeneriqueDAO.select(ListeDemandeClient.class, " where idUnique='"+id.trim()+"'", c);
+                    rep.setCode(200);
+                    rep.setMessage(Constantes.GET_OK);
+                    rep.setResponse(o);
                 }
-                rep.setCode(200);
-                rep.setMessage(Constantes.GET_OK);
-                rep.setResponse(o);
+                
             }catch(Exception ex) {
                 rep.setCode(500);
                 rep.setMessage(ex.toString());
@@ -100,7 +101,7 @@ public class ClientController {
                             int nbJours=Utilitaire.getDaysBetweenTowDates(today,demandeDate[0].getDateDemande());
                             if(nbJours>7){
                                 String iddemande=Constantes.ID_DEMANDE_COPIE+Utilitaire.formatNumber(Utilitaire.getsequence("DemandeCopie", c), Constantes.SEQUENCE_LENGTH);
-                                DemandeCopie demandeinsert=new DemandeCopie(iddemande, p[0].getId(), today, demande.getNbCopie(), Constantes.ETAT_VALID, p[0].getIdCommune());
+                                DemandeCopie demandeinsert=new DemandeCopie(iddemande, p[0].getId(), today, demande.getNbCopie(), Constantes.ETAT_VALID, p[0].getIdCommune(),"");
                                 
                                 //insertion
                                 GeneriqueDAO.insert(demandeinsert, false, c);
@@ -110,6 +111,15 @@ public class ClientController {
                             }else{
                                 throw new Exception("vous ne pouvez pas faire une demande avant "+(7-nbJours)+" jour(s)");
                             }
+                        }else{
+                            String iddemande=Constantes.ID_DEMANDE_COPIE+Utilitaire.formatNumber(Utilitaire.getsequence("DemandeCopie", c), Constantes.SEQUENCE_LENGTH);
+                                DemandeCopie demandeinsert=new DemandeCopie(iddemande, p[0].getId(), today, demande.getNbCopie(), Constantes.ETAT_VALID, p[0].getIdCommune(),"");
+                                
+                                //insertion
+                                GeneriqueDAO.insert(demandeinsert, false, c);
+                                rep.setCode(200);
+                                rep.setMessage(Constantes.INSERT_OK);
+                                c.commit();
                         }
                     }
                    

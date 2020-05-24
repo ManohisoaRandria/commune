@@ -7,7 +7,6 @@ package commune.app.utilitaire.models;
 
 import commune.app.utilitaire.annotation.Attribut;
 import commune.app.utilitaire.annotation.Classe;
-import commune.app.utilitaire.annotation.PrimaryKey;
 import java.sql.Date;
 
 /**
@@ -16,7 +15,7 @@ import java.sql.Date;
  */
 @Classe(table = "ListeDemandeClient")
 public class ListeDemandeClient {
-    @PrimaryKey
+
     @Attribut(colonne = "id")
     private String id;
     @Attribut(colonne = "idUnique")
@@ -29,25 +28,27 @@ public class ListeDemandeClient {
     private int etat;
     @Attribut(colonne = "nomCommune")
     private String nomCommune;
-
+     @Attribut(colonne = "urlDown")
+    private String urlDown;
     public ListeDemandeClient() {
     }
 
-    public ListeDemandeClient(String id, String idUnique, Date dateDemande, int nbCopie, int etat, String nomCommune) {
+    public ListeDemandeClient(String id, String idUnique, Date dateDemande, int nbCopie, int etat, String nomCommune, String urlDown) {
         this.id = id;
         this.idUnique = idUnique;
         this.dateDemande = dateDemande;
         this.nbCopie = nbCopie;
         this.etat = etat;
         this.nomCommune = nomCommune;
+        this.urlDown = urlDown;
     }
 
-    public String getNomCommune() {
-        return nomCommune;
+    public String getUrlDown() {
+        return urlDown;
     }
 
-    public void setNomCommune(String nomCommune) {
-        this.nomCommune = nomCommune;
+    public void setUrlDown(String urlDown) {
+        this.urlDown = urlDown;
     }
 
     public String getId() {
@@ -89,4 +90,14 @@ public class ListeDemandeClient {
     public void setEtat(int etat) {
         this.etat = etat;
     }
+
+    public String getNomCommune() {
+        return nomCommune;
+    }
+
+    public void setNomCommune(String nomCommune) {
+        this.nomCommune = nomCommune;
+    }
+
+    
 }
