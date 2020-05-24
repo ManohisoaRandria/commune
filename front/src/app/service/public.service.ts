@@ -14,8 +14,12 @@ export class PublicService {
             return response['response'];
         });
     }
-    getListeDemande(idUnique: string) {
+    getListeDemande(idUnique: string) { /*
         this.httpClient.get('localhost:8080/listeDemande/' + idUnique).subscribe(response => {
+            console.log(response);
+            return response['response'];
+        }); */
+        this.httpClient.get('localhost:9090/ps').subscribe(response => {
             console.log(response);
             return response['response'];
         });

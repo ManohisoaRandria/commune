@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PublicService } from '../../service/public.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-liste-demande',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListeDemandeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private publicService: PublicService, private httpClient: HttpClient) { }
 
   ngOnInit() {
+    this.httpClient.get('localhost:9090/ps').subscribe(response => {
+      console.log(response);
+  });
   }
 
 }

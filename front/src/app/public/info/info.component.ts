@@ -13,6 +13,7 @@ export class InfoComponent implements OnInit {
   ngOnInit() {
     console.log(localStorage.getItem('idUnique'));
     this.info = this.publicService.getInfo(localStorage.getItem('idUnique'));
+    console.log(this.info);
   }
 
 }

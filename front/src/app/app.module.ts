@@ -16,6 +16,7 @@ import { CommuneComponent } from './commune/commune/commune.component';
 import { PublicService } from './service/public.service';
 import { CommuneService } from './service/commune.service';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 const appRoutes: Routes = [
   {path: '', component: LoginPersonneComponent},
@@ -46,7 +47,8 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    HttpClientModule
   ],
   providers: [
     PublicService,
