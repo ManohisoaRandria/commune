@@ -1,0 +1,13 @@
+<div>
+    <app-public></app-public>
+    <div>
+        <label for="nbr"> nombre de copiet: </label>
+        <input name="nbr" type="text" placeholder="nombre" #nbr>
+    </div><div>
+        <label for="dateDemande"> Date de demande: </label>
+        <input name="dateDemande" type="date" #dateDemande>
+    </div>
+    <div>
+        <button (click)="onSubmit(nbr.value, dateDemande.value)"> Demander </button>
+    </div>
+</div>

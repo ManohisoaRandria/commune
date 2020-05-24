@@ -1,0 +1,16 @@
+<app-commune></app-commune>
+<div>
+    <div>
+        <div>
+            <label for="pseudo">  pseudo </label>
+            <input name="pseudo" type="text" placeholder="pseudo" #pseudo>
+        </div>
+        <div>
+            <label for="mdp">  motDePasse </label>
+            <input name="mdp" type="password" placeholder="motDePasse" #mdp>
+        </div>
+        <div>
+            <button (click)="onSubmit(pseudo.value,mdp.value)"> login </button>
+        </div>
+    </div>
+</div>
