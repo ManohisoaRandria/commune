@@ -14,6 +14,9 @@ import { DemandeComponent } from './commune/demande/demande.component';
 import { PublicComponent } from './public/public/public.component';
 import { CommuneComponent } from './commune/commune/commune.component';
 
+import { PublicService } from './service/public.service';
+import { CommuneService } from './service/commune.service';
+
 const appRoutes: Routes = [
   {path: '', component: LoginPersonneComponent},
   {path: 'LoginPersonne', component: LoginPersonneComponent},
@@ -45,7 +48,10 @@ const appRoutes: Routes = [
     BrowserModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [
+    PublicService,
+    CommuneService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
