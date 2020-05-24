@@ -5,6 +5,8 @@
  */
 package commune.app.utilitaire.fonction;
 
+import commune.app.utilitaire.models.UserCommune;
+import commune.app.utilitaire.models.UserToken;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
@@ -82,6 +84,50 @@ public class Utilitaire {
         }
         return ret + seq;
     }
+    public static UserCommune getUserFromToken(String token, Connection c) throws Exception {
+        UserCommune user = null;
+        try {
+           
+            UserToken[] ut = (UserToken[]) GeneriqueDAO.select(UserToken.class, " where token='" + token.trim() + "' and etat=" + Constantes.TOKEN_VALIDE, c);
+            if (ut.length != 0) {
+               
+                UserCommune[] userTab = (UserCommune[]) GeneriqueDAO.select(UserCommune.class, " where id='" + ut[0].getIdUserCommune() + "'", c);
+                
+                if (userTab.length != 0) {
+                    return userTab[0];
+                }
+
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+
+        return user;
+    }
+    public static boolean checkEmail(String email) throws Exception {
+        boolean isValid = false;
+        isValid = email.matches(Constantes.REGEX_EMAIL);
+
+        return isValid;
+    }
+     public static boolean verifyIfNoMailDoublon(String mail, Connection c) throws Exception {
+        boolean b = false;
+        String requete = " select count(*) as nb from userCommune where email = '" + mail.trim() + "' ";
+        ResultSet rs2;
+        try (Statement st2 = c.createStatement()) {
+            rs2 = st2.executeQuery(requete);
+            int i = 0;
+            while (rs2.next()) {
+                i = rs2.getInt("nb");
+                break;
+            }
+            if (i == 0) {
+                b = true; //tsisy
+            }
+        }
+        rs2.close();
+        return b;
+    }
     public static String getSecurePassword(String passwordToHash) {
         String generatedPassword = null;
         try {
@@ -99,12 +145,7 @@ public class Utilitaire {
         return generatedPassword;
     }
 
-    public static boolean checkEmail(String email) throws Exception {
-        boolean isValid = false;
-        isValid = email.matches(Constantes.REGEX_EMAIL);
-
-        return isValid;
-    }
+  
 //    public static boolean checkNaissance(Date datenaiss) {
 //        boolean b = false;
 //        Date currentdate = Date.valueOf(Utilitaire.getCurrentDate());

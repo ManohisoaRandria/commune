@@ -22,6 +22,8 @@ public class UserCommune {
     private String nom;
      @Attribut(colonne = "prenom")
     private String prenom;
+      @Attribut(colonne = "email")
+    private String email;
      @Attribut(colonne = "mdp")
     private String mdp;
      @Attribut(colonne = "idCommune")
@@ -32,10 +34,11 @@ public class UserCommune {
     public UserCommune() {
     }
 
-    public UserCommune(String id, String nom, String prenom, String mdp, String idCommune, String idDroit) {
+    public UserCommune(String id, String nom, String prenom, String email, String mdp, String idCommune, String idDroit) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
+        this.email = email;
         this.mdp = mdp;
         this.idCommune = idCommune;
         this.idDroit = idDroit;
@@ -87,6 +90,14 @@ public class UserCommune {
 
     public void setIdCommune(String idCommune) {
         this.idCommune = idCommune;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
    
     

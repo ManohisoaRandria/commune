@@ -24,17 +24,21 @@ CREATE TABLE Droit (
     id VARCHAR(21) PRIMARY KEY NOT NULL,
     nom VARCHAR(50)
 );
+insert into droit values('DRT'||nextval('droit_seq'),'normal');
+insert into droit values('DRT'||nextval('droit_seq'),'SU');
 CREATE SEQUENCE usercommune_seq;
 CREATE TABLE UserCommune (
     id VARCHAR(50) PRIMARY KEY NOT NULL,
     nom VARCHAR(50),
     prenom VARCHAR(50),
+    email VARCHAR(80),
     mdp VARCHAR(255),
     idCommune VARCHAR(50),
     idDroit VARCHAR(50),
     FOREIGN KEY(idCommune) REFERENCES Commune(id),
     FOREIGN KEY(idDroit) REFERENCES Droit(id)
 );
+
 CREATE SEQUENCE UserToken_seq;
 CREATE TABLE UserToken (
     id VARCHAR(50) PRIMARY KEY NOT NULL,
@@ -53,6 +57,7 @@ CREATE TABLE DemandeCopie (
     nbCopie INTEGER,
     etat INTEGER,   --1 valide, 10 vita sonia,20 annuler
     idCommune VARCHAR(50),
+    urlDown VARCHAR(50),
     --karapanondronle olona ndemande
     FOREIGN KEY(idCommune) REFERENCES Commune(id),
     FOREIGN KEY(idPersonne) REFERENCES Personne(id)
@@ -71,5 +76,6 @@ select DemandeCopie.id,
         DemandeCopie.dateDemande,
         DemandeCopie.nbCopie,
         DemandeCopie.etat,
-        Commune.nom nomCommune
+        Commune.nom nomCommune,
+        DemandeCopie.urlDown
 from DemandeCopie join Personne on DemandeCopie.idPersonne=Personne.id join Commune on Commune.id=DemandeCopie.idCommune;
