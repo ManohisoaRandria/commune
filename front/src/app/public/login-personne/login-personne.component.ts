@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-login-personne',
@@ -7,14 +9,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./login-personne.component.scss']
 })
 export class LoginPersonneComponent implements OnInit {
-
-  constructor(private router: Router) { }
+resp:any;
+  constructor(private router: Router,private http:HttpClient) { }
 
   ngOnInit() {
   }
 
-  onSubmit() {
-    this.router.navigate(['LoginEmployee']);
+  onSubmit(id) {
+    console.log(id);
+    this.http.get('http://localhost:8080/apropos/'+id).subscribe(res=>{
+      this.resp=res;
+      console.log(this.resp.response);
+    });
+    //this.router.navigate(['LoginEmployee']);
   }
   go1() {
     this.router.navigate(['Info']);
