@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PublicService } from '../../service/public.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-info',
@@ -8,12 +9,12 @@ import { PublicService } from '../../service/public.service';
 })
 export class InfoComponent implements OnInit {
   info;
-  constructor(private publicService: PublicService) { }
+  constructor(private publicService: PublicService, private httpClient: HttpClient) { }
 
   ngOnInit() {
-    console.log(localStorage.getItem('idUnique'));
-    this.info = this.publicService.getInfo(localStorage.getItem('idUnique'));
-    console.log(this.info);
+    this.publicService.getInfo(localStorage.getItem('idUnique')).then((res) => {
+      this.info = res;
+    });
   }
 
 }
