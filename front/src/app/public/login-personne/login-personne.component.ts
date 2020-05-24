@@ -15,15 +15,8 @@ resp:any;
   ngOnInit() {
   }
 
-  onSubmit(id) {
-    console.log(id);
-    this.http.get('http://localhost:8080/apropos/'+id).subscribe(res=>{
-      this.resp=res;
-      console.log(this.resp.response);
-    });
-    //this.router.navigate(['LoginEmployee']);
-  }
-  go1() {
+  onSubmit(idUnique: string) {
+    localStorage.setItem("idUnique", idUnique);
     this.router.navigate(['Info']);
   }
 
