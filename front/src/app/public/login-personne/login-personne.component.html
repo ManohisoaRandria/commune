@@ -1,0 +1,11 @@
+<div>
+    <app-public></app-public>
+    <div>
+        <label for="id">  veuillez entrer votre identifiant: </label>
+        <input name="id" type="text" placeholder="ID" #id>
+    </div>
+    <div>
+        <button (click)="onSubmit(id.value)"> Entrer </button>
+    </div>
+</div>
+

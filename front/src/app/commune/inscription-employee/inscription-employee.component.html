@@ -1,0 +1,30 @@
+<app-commune></app-commune>
+<div>
+    <div>
+        <label for="nom"> Nom </label>
+        <input name="nom" type="text" placeholder="Nom" #nom>
+    </div>
+    <div>
+        <label for="prenom"> Prenom </label>
+        <input name="prenom" type="text" placeholder="Prenom" #prenom>
+    </div>
+    <div>
+        <label for="pwd"> Mot de passe </label>
+        <input name="pwd" type="password" placeholder="Mot de passe" #pwd>
+    </div>
+    <div>
+        <label for="idCommune"> Commune </label>
+        <select name="idCommune" #idCommune>
+			<option value="0" > commune 0 </option>
+		</select>
+    </div>
+    <div>
+        <label for="idDroit"> Droit </label>
+        <select name="idDroit" #idDroit>
+			<option value="0" > droit 0 </option>
+		</select>
+    </div>
+    <div>
+        <button (click)="onSubmit(nom.value, prenom.value, pwd.value, idCommune.value, idDroit.value)"> Inscreiption </button>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+<app-commune></app-commune>
+<div>
+    <div>
+        <label for="idUnique"> ID Unique </label>
+        <input name="idUnique" type="text" placeholder="ID Unique" #idUnique>
+    </div>
+    <div>
+        <label for="nom"> Nom </label>
+        <input name="nom" type="text" placeholder="Nom" #nom>
+    </div>
+    <div>
+        <label for="prenom"> Prenom </label>
+        <input name="prenom" type="text" placeholder="Prenom" #prenom>
+    </div>
+    <div>
+        <label for="dateNaissance"> Nee le </label>
+        <input name="dateNaissance" type="date" #dateNaissance>, 
+        <input name="heureNaissance" type="time" value="12:00:00" #heureNaissance>
+        <label for="lieuNaissance"> a </label>
+        <input name="lieuNaissance" type="text" placeholder="lieu de naissance" #dateNaissance>
+    </div>
+    <div>
+        <label for="pere"> Pere </label>
+        <input name="pere" type="text" placeholder="Pere" #pere>
+    </div>
+    <div>
+        <label for="mere"> Mere </label>
+        <input name="mere" type="text" placeholder="Mere" #mere>
+    </div>
+    <div>
+        <label for="idCommune"> Commune </label>
+        <select name="idCommune" #idCommune>
+			<option value="0" > commune 0 </option>
+		</select>
+    </div>
+    <div>
+        <button (click)="onSubmit(idUnique.value, nom.value, prenom.value, dateNaissance.value, lieuNaissance.value, heureNaissance.value, pere.value, mere.value, idCommune.value)"> Inscreiption </button>
+    </div>
+</div>
